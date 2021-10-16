@@ -1,6 +1,9 @@
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -15,6 +18,11 @@ public class UserDaoTest {
 	@BeforeClass
 	public static void testSetUp() {
 		uDao = new UserDaoDB();
+	}
+	
+	@Before
+	public void testDelim() {
+		System.out.println("----------");
 	}
 	
 	@Test
@@ -32,10 +40,21 @@ public class UserDaoTest {
 	}
 	
 	@Test
+	public void getAllUsersTest() {
+		List<User> users = uDao.getAllUsers();
+		System.out.println("Results of getAllUsers:");
+		for(User u : users) {
+			System.out.println(u);
+		}
+		assertFalse(users.size() == 1);
+	}
+	
+	@Test
 	public void getUserByIdTest() {
 		User jeremy = new User(1, "JBelpois", "einstein", "Jeremy", "Belpois", "jbelpois@mail.com", 2);
 		User ret = uDao.getUserById(1);
 		boolean success = (jeremy.getUsername().equals(ret.getUsername()));
+		System.out.println("Result of getUserById: " + ret);
 		assertTrue(success);
 	}
 	
@@ -44,6 +63,7 @@ public class UserDaoTest {
 		User jeremy = new User(1, "JBelpois", "einstein", "Jeremy", "Belpois", "jbelpois@mail.com", 2);
 		User ret = uDao.getUserByUsername("JBelpois");
 		boolean success = (jeremy.getId() == ret.getId());
+		System.out.println("Result of getUserByUsername: " + ret);
 		assertTrue(success);
 	}
 	
@@ -52,6 +72,7 @@ public class UserDaoTest {
 		User jeremy = new User(1, "JBelpois", "einstein", "Jeremy", "Belpois", "jbelpois@mail.com", 2);
 		User ret = uDao.getUserByEmail("jbelpois@mail.com");
 		boolean success = (jeremy.getId() == ret.getId());
+		System.out.println("Result of getUserByEmail: " + ret);
 		assertTrue(success);
 	}
 	

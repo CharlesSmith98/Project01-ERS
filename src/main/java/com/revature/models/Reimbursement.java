@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 /*
  * CREATE TABLE IF NOT EXISTS ers_reimbursement(
@@ -34,6 +35,13 @@ public class Reimbursement {
 		
 	}
 
+	public Reimbursement(double amount, int authorId, int typeId) {
+		super();
+		this.amount = amount;
+		this.authorId = authorId;
+		this.typeId = typeId;
+	}
+	
 	public Reimbursement(int id, double amount, Timestamp timeSubmitted, 
 			Timestamp timeResolved, String description, byte[] receipt, 
 			int authorId, int resolverId, int statusId, int typeId) {
@@ -128,6 +136,14 @@ public class Reimbursement {
 
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
+	}
+
+	@Override
+	public String toString() {
+		return "Reimbursement [id=" + id + ", amount=" + amount + ", timeSubmitted=" + timeSubmitted + ", timeResolved="
+				+ timeResolved + ", description=" + description + ", receipt=" + Arrays.toString(receipt)
+				+ ", authorId=" + authorId + ", resolverId=" + resolverId + ", statusId=" + statusId + ", typeId="
+				+ typeId + "]";
 	}
 	
 }
